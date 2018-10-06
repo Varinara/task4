@@ -18,7 +18,7 @@ tree::tree() {
                 x[--pos]++;
             }
         }
-        //bs_repr[i] = bit_sequence(1);
+        bs_repr[i] = bit_sequence(1);
         for (size_t j = 0; j < 8; j++) {
             bs_repr[i].push(bool(x[j]));
         }
