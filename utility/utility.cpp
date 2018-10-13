@@ -25,8 +25,12 @@ int main(int argc, char *argv[]) {
     std::string src_name = argv[2];
     std::string dst_name = argv[3];
 
+
     std::ifstream src_file(src_name, std::ios::in | std::ios::binary);
     std::ofstream dst_file(dst_name, std::ios::out | std::ios::binary);
+
+    std::istream& s = src_file;
+    std::ostream& d = dst_file;
 
     if (!src_file.is_open())
         throw std::runtime_error("Source file doesn't exist");
@@ -35,7 +39,7 @@ int main(int argc, char *argv[]) {
 
     if (option == "-e" || option == "--encode") {
         try {
-            encoder e(src_file, dst_file);
+            encoder e(s, d);
             e.encode();
         }
         catch (std::exception &ex) {
@@ -46,13 +50,12 @@ int main(int argc, char *argv[]) {
         }
     } else if (option == "-d" || option == "--decode") {
         try {
-            decoder d(src_file, dst_file);
-            d.decode();
+            decoder x(s, d);
+            x.decode();
         }
         catch (std::exception &ex) {
             print_error(ex.what());
             cout << fixed << setprecision(0) << "TIME = " << clock() / (long double)CLOCKS_PER_SEC * 1000 << " ms\n";
-
             return 1;
         }
     } else {
