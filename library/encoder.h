@@ -6,7 +6,7 @@
 
 class encoder : basic_coder {
 public:
-    encoder(const std::string &src, const std::string &dst);
+    encoder(std::ifstream &sr,  std::ofstream &dst);
 
     void encode();
 

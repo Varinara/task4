@@ -24,9 +24,15 @@ int main(int argc, char *argv[]) {
     std::string option = argv[1];
     std::string src_name = argv[2];
     std::string dst_name = argv[3];
+
+
+    std::ifstream src_file(src_name, std::ios::in | std::ios::binary);
+    std::ofstream dst_file(dst_name, std::ios::out | std::ios::binary);
+
+
     if (option == "-e" || option == "--encode") {
         try {
-            encoder e(src_name, dst_name);
+            encoder e(src_file, dst_file);
             e.encode();
         }
         catch (std::exception &ex) {
@@ -37,7 +43,7 @@ int main(int argc, char *argv[]) {
         }
     } else if (option == "-d" || option == "--decode") {
         try {
-            decoder d(src_name, dst_name);
+            decoder d(src_file, dst_file);
             d.decode();
         }
         catch (std::exception &ex) {

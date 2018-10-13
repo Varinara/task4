@@ -1,7 +1,5 @@
 #include "encoder.h"
 
-encoder::encoder(const std::string &src, const std::string &dst) : basic_coder(src, dst, 8 * 1024 * 1024) {}
-
 void encoder::count_bytes() {
     std::vector<char> buffer(buffer_size);
     while (src_file) {
@@ -31,3 +29,5 @@ void encoder::encode() {
     src_file.seekg(0, std::ifstream::beg); // pointer in the begin
     compress();
 }
+
+encoder::encoder(std::ifstream &sr, std::ofstream &dst) : basic_coder(sr, dst, 8 * 1024 * 1024) {}

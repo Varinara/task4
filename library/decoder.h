@@ -6,7 +6,7 @@
 
 class decoder : basic_coder {
 public:
-    decoder(const std::string &src, const std::string &dst);
+    decoder(std::ifstream &sr,  std::ofstream &dst);
 
     void decode();
 
