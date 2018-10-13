@@ -8,7 +8,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/library)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
-add_executable(huffman
+add_library(huffman-library STATIC
         library/tree.h
         library/tree.cpp
         library/bit_sequence.h
@@ -19,10 +19,19 @@ add_executable(huffman
         library/encoder.cpp
         library/decoder.h
         library/decoder.cpp
-        utility/utility.cpp
-        #tests/gtest/gtest-all.cc
-        #tests/gtest/gtest.h
-        #tests/gtest/gtest_main.cc
-        #tests/testing.cpp
         )
 
+add_executable(huffman
+        utility/utility.cpp
+        )
+
+
+add_executable(huffman-testing
+        tests/gtest/gtest-all.cc
+        tests/gtest/gtest.h
+        tests/gtest/gtest_main.cc
+        tests/testing.cpp
+        )
+
+target_link_libraries(huffman huffman-library)
+target_link_libraries(huffman-testing huffman-library -lpthread)

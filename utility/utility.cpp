@@ -29,6 +29,10 @@ int main(int argc, char *argv[]) {
     std::ifstream src_file(src_name, std::ios::in | std::ios::binary);
     std::ofstream dst_file(dst_name, std::ios::out | std::ios::binary);
 
+    if (!src_file.is_open())
+        throw std::runtime_error("Source file doesn't exist");
+    if (!dst_file.is_open())
+        throw std::runtime_error("Destination file name is invalid");
 
     if (option == "-e" || option == "--encode") {
         try {
