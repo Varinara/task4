@@ -1,6 +1,6 @@
 #include "decoder.h"
 
-decoder::decoder(std::ifstream &sr, std::ofstream &dst) : basic_coder(sr, dst, 8 * 1024 * 1024) {}
+decoder::decoder(std::istream &sr, std::ostream &dst) : basic_coder(sr, dst, 8 * 1024 * 1024) {}
 
 void decoder::decode() {
     read_dictionary();

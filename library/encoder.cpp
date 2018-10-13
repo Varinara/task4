@@ -26,8 +26,8 @@ void encoder::encode() {
     auto dict = h_tree->get_dict();
     dst_file.write(dict.data(), dict.size());
     src_file.clear();
-    src_file.seekg(0, std::ifstream::beg); // pointer in the begin
+    src_file.seekg(0, std::istream::beg); // pointer in the begin
     compress();
 }
 
-encoder::encoder(std::ifstream &sr, std::ofstream &dst) : basic_coder(sr, dst, 8 * 1024 * 1024) {}
+encoder::encoder(std::istream &sr, std::ostream &dst) : basic_coder(sr, dst, 8 * 1024 * 1024) {}

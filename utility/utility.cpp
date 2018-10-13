@@ -25,7 +25,6 @@ int main(int argc, char *argv[]) {
     std::string src_name = argv[2];
     std::string dst_name = argv[3];
 
-
     std::ifstream src_file(src_name, std::ios::in | std::ios::binary);
     std::ofstream dst_file(dst_name, std::ios::out | std::ios::binary);
 
