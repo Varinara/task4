@@ -25,17 +25,19 @@ int main(int argc, char *argv[]) {
     std::string src_name = argv[2];
     std::string dst_name = argv[3];
 
-
     std::ifstream src_file(src_name, std::ios::in | std::ios::binary);
     std::ofstream dst_file(dst_name, std::ios::out | std::ios::binary);
 
+    if (!src_file.is_open()) {
+        std::cout << "Source file doesn't exist\n";
+        return 0;
+    }
+    if (!dst_file.is_open()) {
+        std::cout << "Destination file name is invalid\n";
+        return 0;
+    }
     std::istream& s = src_file;
     std::ostream& d = dst_file;
-
-    if (!src_file.is_open())
-        throw std::runtime_error("Source file doesn't exist");
-    if (!dst_file.is_open())
-        throw std::runtime_error("Destination file name is invalid");
 
     if (option == "-e" || option == "--encode") {
         try {
@@ -56,6 +58,7 @@ int main(int argc, char *argv[]) {
         catch (std::exception &ex) {
             print_error(ex.what());
             cout << fixed << setprecision(0) << "TIME = " << clock() / (long double)CLOCKS_PER_SEC * 1000 << " ms\n";
+
             return 1;
         }
     } else {
